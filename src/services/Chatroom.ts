@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { sleep } from '../commons/utils';
 import { chatlist } from './data';
 
 export interface ChatMsg {
@@ -18,22 +17,26 @@ export interface ChatRoom {
   unreadMsgCount: number;
 }
 
-export const getChatList = async (): Promise<ChatRoom[]> => {
-  await sleep(1000);
-  return chatlist;
+const getChatroom = async (chatroomId: string) => {
+  return chatlist.find(({ id }) => id === chatroomId);
 };
 
-export const useChatList = (): [ChatRoom[], boolean, Error?] => {
-  const [chatList, setChatList] = useState<ChatRoom[]>([]);
+interface Props {
+  chatroomId: string;
+}
+
+export const useChatroom = (props: Props): [ChatRoom | undefined, boolean, Error | undefined] => {
+  const { chatroomId } = props;
+  const [chatroom, setChatroom] = useState<ChatRoom | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
   useEffect(() => {
-    const fetchChatList = async () => {
+    const fetchChatroom = async () => {
       try {
         setLoading(true);
-        const data = await getChatList();
-        setChatList(data);
+        const data = await getChatroom(chatroomId);
+        setChatroom(data);
       } catch (e) {
         setError(e);
       } finally {
@@ -41,8 +44,8 @@ export const useChatList = (): [ChatRoom[], boolean, Error?] => {
       }
     };
 
-    fetchChatList();
+    fetchChatroom();
   }, []);
 
-  return [chatList, loading, error];
+  return [chatroom, loading, error];
 };

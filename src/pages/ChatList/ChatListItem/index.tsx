@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { BLUERY_GREY, CHARCOAL_GREY, WHITE } from '../../../commons/colors';
 import { ColumnContainer } from '../../../commons/styles';
-import { ChatRoom } from '../../../services/Chatroom';
+import { ChatRoom } from '../../../services/chatroom';
 import Badge from './Badge';
 
 interface Props {

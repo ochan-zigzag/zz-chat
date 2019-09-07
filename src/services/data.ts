@@ -1,6 +1,6 @@
-// 서버에서 가져와야할 값들
+import { ChatRoom } from './chatroom';
 
-import { ChatRoom } from './Chatroom';
+// 서버에서 가져와야할 값들
 
 export const chatlist: ChatRoom[] = [
   {
