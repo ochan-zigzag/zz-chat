@@ -1,0 +1,11 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react-hooks"],
+  "jsRules": {},
+  "rules": {
+    "react-hooks-nesting": "error",
+    "quotemark": [true, "single"],
+    "interface-name": false
+  },
+  "rulesDirectory": []
+}
