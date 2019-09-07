@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { sleep } from '../commons/utils';
+import User from '../models/user';
+import MyUserStore from '../store/userStore';
 import { usersByUserId } from './data';
-
-export interface User {
-  id: string;
-  name: string;
-  photoUrl?: string;
-}
 
 const getUser = async (userId: string): Promise<User | undefined> => {
   await sleep(400);
@@ -16,7 +12,9 @@ const getUser = async (userId: string): Promise<User | undefined> => {
 };
 
 export const useUser = (userId: string): [User | undefined, boolean, Error | undefined] => {
-  const [user, setUser] = useState<User | undefined>();
+  const myUserStore = useContext(MyUserStore);
+  const user = useMemo(() => myUserStore.getUser(userId), [userId]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -25,7 +23,10 @@ export const useUser = (userId: string): [User | undefined, boolean, Error | und
       try {
         setLoading(true);
         const data = await getUser(userId);
-        setUser(data);
+        if (!data) {
+          throw Error(`user ${userId} not found`);
+        }
+        myUserStore.setUser(data);
       } catch (e) {
         setError(e);
       } finally {

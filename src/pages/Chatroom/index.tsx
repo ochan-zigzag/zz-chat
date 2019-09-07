@@ -2,16 +2,18 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 
+import { GREY } from '../../commons/colors';
 import Header from '../../components/Header';
 import { useChatMsgs } from '../../services/chatMsg';
 import { useChatroom } from '../../services/chatroom';
 import { useMyUser } from '../../services/user';
+import Bottom from './Bottom';
 import ChatMsgBox from './ChatMsgBox';
 
 const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
   const { chatroomId } = props.match.params;
   const [chatroom, loadingChatroom, errorChatroom] = useChatroom(chatroomId);
-  const [chatMsgs, loadingChatMsgs, errorChatMsgs, fetchMore] = useChatMsgs(chatroomId);
+  const { chatMsgs, loading: loadingChatMsgs, error: errorChatMsgs, fetchMore, addMsg } = useChatMsgs(chatroomId);
   const [myUser, loadingMyUser, errorMyUser] = useMyUser();
 
   if (loadingChatroom || !chatroom || !myUser) {
@@ -20,16 +22,15 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
 
   const { name } = chatroom;
 
-  console.log({ chatMsgs });
-
   return (
     <Container>
       <Header title={name} />
-      <ChatMsgsContainer>
-        {chatMsgs.map(chatMsg => (
-          <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} />
-        ))}
-      </ChatMsgsContainer>
+
+      {chatMsgs.map(chatMsg => (
+        <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} />
+      ))}
+
+      <Bottom myUserId={myUser.id} addMsg={addMsg} />
     </Container>
   );
 };
@@ -37,9 +38,12 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
 export default Chatroom;
 
 const Container = styled.div`
-  overflow: hidden;
+  padding-top: 44px;
+  background-color: ${GREY};
+  height: calc(100vh - 44px);
 `;
 
 const ChatMsgsContainer = styled.div`
   width: 100%;
+  height: 100%;
 `;

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import { BLUERY_GREY, CHARCOAL_GREY, WHITE } from '../../../commons/colors';
 import { ColumnContainer } from '../../../commons/styles';
-import { ChatRoom } from '../../../services/chatroom';
+import Chatroom from '../../../models/chatroom';
 import Badge from './Badge';
 
 interface Props {
-  chatroom: ChatRoom;
+  chatroom: Chatroom;
 }
 
 const ChatListItem = (props: Props) => {

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 import { sleep } from '../commons/utils';
-import { ChatRoom } from './chatroom';
+import Chatroom from '../models/chatroom';
 import { chatlist } from './data';
 
-const getChatList = async (): Promise<ChatRoom[]> => {
+const getChatList = async (): Promise<Chatroom[]> => {
   await sleep(1000);
   return chatlist;
 };
 
-export const useChatList = (): [ChatRoom[], boolean, Error?] => {
-  const [chatList, setChatList] = useState<ChatRoom[]>([]);
+export const useChatList = (): [Chatroom[], boolean, Error?] => {
+  const [chatList, setChatList] = useState<Chatroom[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 

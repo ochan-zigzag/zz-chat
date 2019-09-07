@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { sleep } from '../commons/utils';
-import { ChatMsg } from './chatMsg';
+import Chatroom from '../models/chatroom';
 import { chatlist } from './data';
-
-export interface ChatRoom {
-  id: string;
-  name: string;
-  photoUrl?: string;
-  lastMsg: ChatMsg;
-  unreadMsgCount: number;
-}
 
 const getChatroom = async (chatroomId: string) => {
   await sleep(500);
@@ -18,8 +10,8 @@ const getChatroom = async (chatroomId: string) => {
   return chatlist.find(({ id }) => id === chatroomId);
 };
 
-export const useChatroom = (chatroomId: string): [ChatRoom | undefined, boolean, Error | undefined] => {
-  const [chatroom, setChatroom] = useState<ChatRoom | undefined>();
+export const useChatroom = (chatroomId: string): [Chatroom | undefined, boolean, Error | undefined] => {
+  const [chatroom, setChatroom] = useState<Chatroom | undefined>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 

@@ -1,6 +1,6 @@
-import { ChatMsg } from './chatMsg';
-import { ChatRoom } from './chatroom';
-import { User } from './user';
+import { ChatMsg } from '../models/chatMsg';
+import Chatroom from '../models/chatroom';
+import User from '../models/user';
 
 // 서버에서 가져와야할 값들
 
@@ -123,7 +123,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   ],
 };
 
-export const chatlist: ChatRoom[] = [
+export const chatlist: Chatroom[] = [
   {
     id: '장만월 사장님',
     lastMsg: chatMsgsByChatroomId['장만월 사장님'].slice(-1)[0],
