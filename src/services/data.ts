@@ -11,7 +11,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '장만월 사장님',
-    photoUrl: '',
+    photoUrl: '/images/장만월_사장님.png',
     unreadMsgCount: 2,
   },
   {
@@ -22,7 +22,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '신정근 바텐더',
-    photoUrl: '',
+    photoUrl: '/images/신정근_바텐더.png',
     unreadMsgCount: 0,
   },
   {
@@ -33,7 +33,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '이미라 의사',
-    photoUrl: '',
+    photoUrl: '/images/이미라_의사.png',
     unreadMsgCount: 0,
   },
   {
@@ -44,7 +44,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '구찬성 지배인',
-    photoUrl: '',
+    photoUrl: '/images/구찬성_지배인.png',
     unreadMsgCount: 0,
   },
   {
@@ -55,7 +55,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '노준석 총지배인',
-    photoUrl: '',
+    photoUrl: '/images/노준석_총지배인.png',
     unreadMsgCount: 0,
   },
   {
@@ -66,7 +66,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '김유나 인턴',
-    photoUrl: '',
+    photoUrl: '/images/김유나_인턴.png',
     unreadMsgCount: 0,
   },
   {
@@ -77,7 +77,7 @@ export const chatlist: ChatRoom[] = [
       userId: '',
     },
     name: '구현모',
-    photoUrl: '',
+    photoUrl: '/images/구현모.png',
     unreadMsgCount: 0,
   },
   {
@@ -87,8 +87,8 @@ export const chatlist: ChatRoom[] = [
       createdAt: new Date('2019-08-28 09:32:00'),
       userId: '',
     },
-    name: '구현모',
-    photoUrl: '',
+    name: '구현모 2',
+    photoUrl: '/images/구현모.png',
     unreadMsgCount: 0,
   },
   {
@@ -98,8 +98,8 @@ export const chatlist: ChatRoom[] = [
       createdAt: new Date('2019-08-28 09:32:00'),
       userId: '',
     },
-    name: '구현모',
-    photoUrl: '',
+    name: '구현모 3',
+    photoUrl: '/images/구현모.png',
     unreadMsgCount: 0,
   },
   {
@@ -109,8 +109,8 @@ export const chatlist: ChatRoom[] = [
       createdAt: new Date('2019-08-28 09:32:00'),
       userId: '',
     },
-    name: '구현모',
-    photoUrl: '',
+    name: '구현모 4',
+    photoUrl: '/images/구현모.png',
     unreadMsgCount: 0,
   },
 ];
