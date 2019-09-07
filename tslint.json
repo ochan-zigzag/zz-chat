@@ -4,8 +4,9 @@
   "jsRules": {},
   "rules": {
     "react-hooks-nesting": "error",
-    "quotemark": [true, "single"],
-    "interface-name": false
+    "quotemark": [true, "single", "jsx-double"],
+    "interface-name": false,
+    "arrow-parens": false
   },
   "rulesDirectory": []
 }

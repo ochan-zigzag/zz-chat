@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { PURPLE, WHITE } from "../../commons/colors";
+import React from 'react';
+import styled from 'styled-components';
+import { PURPLE, WHITE } from '../../commons/colors';
 
 interface Props {
   title: string;

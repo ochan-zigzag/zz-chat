@@ -7,6 +7,7 @@ export const RowSpaceBetweenContainer = styled.div`
 `;
 
 export const ColumnContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
 `;
