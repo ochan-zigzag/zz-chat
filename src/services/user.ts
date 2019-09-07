@@ -1,3 +1,4 @@
+import { useObserver } from 'mobx-react-lite';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { sleep } from '../commons/utils';
@@ -13,7 +14,6 @@ const getUser = async (userId: string): Promise<User | undefined> => {
 
 export const useUser = (userId: string): [User | undefined, boolean, Error | undefined] => {
   const myUserStore = useContext(MyUserStore);
-  const user = useMemo(() => myUserStore.getUser(userId), [userId]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -37,7 +37,7 @@ export const useUser = (userId: string): [User | undefined, boolean, Error | und
     fetchUser();
   }, []);
 
-  return [user, loading, error];
+  return useObserver(() => [myUserStore.getUser(userId), loading, error]);
 };
 
 export const useMyUser = () => {
