@@ -8,11 +8,8 @@ interface Props {
 const Badge = (props: Props) => {
   const { count } = props;
 
-  if (count === 0) {
-    return null;
-  }
   return (
-    <Container>
+    <Container shouldVisible={count > 0}>
       <Count>{count}</Count>
     </Container>
   );
@@ -20,7 +17,7 @@ const Badge = (props: Props) => {
 
 export default Badge;
 
-const Container = styled.div`
+const Container = styled.div<{ shouldVisible: boolean }>`
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -28,6 +25,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: ${props => (props.shouldVisible ? 'visible' : 'hidden')};
 `;
 
 const Count = styled.span`

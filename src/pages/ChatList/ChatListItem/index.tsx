@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { BLUERY_GREY, CHARCOAL_GREY, WHITE } from '../../../commons/colors';
-import { ColumnContainer, RowSpaceBetweenContainer } from '../../../commons/styles';
+import { ColumnContainer } from '../../../commons/styles';
 import { ChatRoom } from '../../../services/Chatroom';
 import Badge from './Badge';
 
@@ -27,15 +27,13 @@ const ChatListItem = (props: Props) => {
     <Container>
       {photoUrl ? <ProfileImage src={photoUrl} /> : <DefaultImage />}
       <ColumnContainer>
-        <RowSpaceBetweenContainer>
-          <Name>{name}</Name>
-          <LastMsgDate>{lastDate}</LastMsgDate>
-        </RowSpaceBetweenContainer>
-        <RowSpaceBetweenContainer>
-          <LastMsgText>{content}</LastMsgText>
-          <Badge count={unreadMsgCount} />
-        </RowSpaceBetweenContainer>
+        <Name>{name}</Name>
+        <LastMsgText>{content}</LastMsgText>
       </ColumnContainer>
+      <RightEndContainer>
+        <LastMsgDate>{lastDate}</LastMsgDate>
+        <Badge count={unreadMsgCount} />
+      </RightEndContainer>
     </Container>
   );
 };
@@ -44,26 +42,38 @@ export default ChatListItem;
 
 const Container = styled.div`
   height: 74px;
+  width: 100%;
   background-color: ${WHITE};
-  padding: 0 16px;
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
 `;
 
 const ProfileImage = styled.img`
-  width: 56px;
+  min-width: 56px;
   height: 56px;
   border-radius: 50%;
-  margin-right: 16px;
+  margin: 0 16px;
 `;
 
 const DefaultImage = styled.div`
-  width: 56px;
+  min-width: 56px;
   height: 56px;
   border-radius: 50%;
   background-color: ${BLUERY_GREY};
-  margin-right: 16px;
+  margin: 0 16px;
+`;
+
+const RightEndContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 const Name = styled.span`
@@ -76,10 +86,15 @@ const Name = styled.span`
 const LastMsgDate = styled.span`
   font-size: 11px;
   color: ${BLUERY_GREY};
+  margin-bottom: 6px;
 `;
 
-// TODO: ... 보여주기
 const LastMsgText = styled.span`
   font-size: 13px;
+  max-width: 65%;
   color: ${BLUERY_GREY};
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

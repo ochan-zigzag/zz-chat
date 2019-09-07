@@ -18,9 +18,13 @@ const Header = (props: Props) => {
 export default Header;
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 44px;
   background-color: ${PURPLE};
+  z-index: 10;
 `;
 
 const Title = styled.span`
