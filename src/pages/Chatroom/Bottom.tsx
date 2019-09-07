@@ -1,5 +1,5 @@
-import { Formik, FormikActions } from 'formik';
-import React, { useCallback } from 'react';
+import { Field, FieldProps, Form, Formik, FormikActions, FormikErrors } from 'formik';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { PURPLE, WHITE } from '../../commons/colors';
@@ -16,6 +16,8 @@ interface Props {
 
 const Bottom = (props: Props) => {
   const { myUserId, addMsg } = props;
+
+  const initialValues = useMemo(() => ({ content: '' }), []);
   const handleSubmit = useCallback(
     async (values: FormValues, formikActions: FormikActions<FormValues>) => {
       await addMsg({
@@ -23,27 +25,43 @@ const Bottom = (props: Props) => {
         content: values.content,
       });
       formikActions.setSubmitting(false);
+      formikActions.resetForm(initialValues);
     },
     [myUserId, addMsg],
   );
 
+  const validate = useCallback((values: FormValues) => {
+    const errors: FormikErrors<FormValues> = {};
+
+    if (!values.content) {
+      errors.content = '메세지를 작성해주세요';
+    }
+
+    return errors;
+  }, []);
+
   return (
     <Formik<FormValues>
-      initialValues={{
-        content: '',
-      }}
+      initialValues={initialValues}
+      validate={validate}
       onSubmit={handleSubmit}
       render={() => (
-        <Container>
-          <MsgInputContainer placeholder="메세지를 입력하세요.." />
-          <SubmitButton type="submit">
-            <img src="images/ic-send.svg" />
-          </SubmitButton>
-        </Container>
+        <Form>
+          <Container>
+            <Field name="content" render={MsgInputComponent} />
+            <SubmitButton type="submit">
+              <img src="images/ic-send.svg" />
+            </SubmitButton>
+          </Container>
+        </Form>
       )}
     />
   );
 };
+
+const MsgInputComponent = ({ field }: FieldProps<string>) => (
+  <MsgInputContainer {...field} placeholder="메세지를 입력하세요.." />
+);
 
 export default Bottom;
 
