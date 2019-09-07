@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { sleep } from '../commons/utils';
+import { ChatMsg } from './chatMsg';
 import { chatlist } from './data';
-
-export interface ChatMsg {
-  content: string;
-  photoUrl?: string;
-  createdAt: Date;
-  userId: string;
-}
 
 export interface ChatRoom {
   id: string;
@@ -18,18 +13,15 @@ export interface ChatRoom {
 }
 
 const getChatroom = async (chatroomId: string) => {
+  await sleep(500);
+  // 서버에서 가져왔다고 가정
   return chatlist.find(({ id }) => id === chatroomId);
 };
 
-interface Props {
-  chatroomId: string;
-}
-
-export const useChatroom = (props: Props): [ChatRoom | undefined, boolean, Error | undefined] => {
-  const { chatroomId } = props;
-  const [chatroom, setChatroom] = useState<ChatRoom | undefined>(undefined);
+export const useChatroom = (chatroomId: string): [ChatRoom | undefined, boolean, Error | undefined] => {
+  const [chatroom, setChatroom] = useState<ChatRoom | undefined>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState();
 
   useEffect(() => {
     const fetchChatroom = async () => {

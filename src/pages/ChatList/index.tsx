@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import Header from '../../components/Header'
-import { useChatList } from '../../services/chatList'
-import ChatListItem from './ChatListItem'
-import MenuButton from './Header/MenuButton'
-import MyPageButton from './Header/MyPageButton'
+import Header from '../../components/Header';
+import { useChatList } from '../../services/chatList';
+import ChatListItem from './ChatListItem';
+import MenuButton from './Header/MenuButton';
+import MyPageButton from './Header/MyPageButton';
 
 const ChatList = () => {
   const [chatList, loading, error] = useChatList();

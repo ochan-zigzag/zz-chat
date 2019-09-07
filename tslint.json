@@ -6,7 +6,9 @@
     "react-hooks-nesting": "error",
     "quotemark": [true, "single", "jsx-double"],
     "interface-name": false,
-    "arrow-parens": false
+    "arrow-parens": false,
+    "object-literal-sort-keys": false,
+    "object-literal-key-quotes": false
   },
   "rulesDirectory": []
 }
