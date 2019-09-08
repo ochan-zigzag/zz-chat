@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
@@ -12,8 +12,8 @@ import { useMyUser } from '../../services/user';
 import Bottom from './Bottom';
 import ChatMsgContainer from './ChatMsgContainer';
 import BackButton from './Header/BackButton';
-import SearchButton from './Header/SearchButton';
-import UploadButton from './Header/UploadButton';
+import RightContainer from './Header/RightContainer';
+import Title from './Header/Title';
 import GalleryCarousel from './Upload/GalleryCarousel';
 
 const duration = 300;
@@ -37,14 +37,8 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
     <Container>
       <Header
         leftComponent={<BackButton onClickBack={handleClickBack} />}
-        title={chatroom ? chatroom.name : ''}
-        rightComponent={
-          <>
-            <UploadButton onClickUpload={handleClickUpload} />
-            <Divider />
-            <SearchButton />
-          </>
-        }
+        title={<Title title={chatroom ? chatroom.name : ''} />}
+        rightComponent={<RightContainer onClickUpload={handleClickUpload} />}
       />
       {loadingChatroom || !chatroom || !myUser ? (
         <>{/* TODO: 스켈레톤 보여주기 */}</>
@@ -71,8 +65,4 @@ const Container = styled.div`
   padding-bottom: 100px;
   background-color: ${GREY};
   min-height: calc(100vh - 144px);
-`;
-
-const Divider = styled.div`
-  width: 16px;
 `;

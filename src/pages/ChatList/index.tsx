@@ -7,6 +7,7 @@ import { useChatList } from '../../services/chatList';
 import ChatListItem from './ChatListItem';
 import MenuButton from './Header/MenuButton';
 import MyPageButton from './Header/MyPageButton';
+import Title from './Header/Title';
 
 const ChatList = (props: RouteComponentProps) => {
   const [chatList, loading, error] = useChatList();
@@ -18,7 +19,7 @@ const ChatList = (props: RouteComponentProps) => {
 
   return (
     <Container>
-      <Header leftComponent={<MenuButton />} title="채팅" rightComponent={<MyPageButton />} />
+      <Header leftComponent={<MenuButton />} title={<Title title="채팅" />} rightComponent={<MyPageButton />} />
       <ChatListContainer>
         {chatList.map(chatroom => (
           <ChatListItem inProp={inProp} setInProp={setInProp} push={push} key={chatroom.id} chatroom={chatroom} />

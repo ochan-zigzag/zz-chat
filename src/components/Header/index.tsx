@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { PURPLE, WHITE } from '../../commons/colors';
+import { PURPLE } from '../../commons/colors';
 
 interface Props {
-  title: string;
+  title: ReactNode;
   leftComponent?: ReactNode;
   rightComponent?: ReactNode;
 }
@@ -17,7 +17,7 @@ const Header = (props: Props) => {
   return (
     <Container>
       <LeftContainer>{leftComponent}</LeftContainer>
-      <Title>{title}</Title>
+      {title}
       <RightContainer>{rightComponent}</RightContainer>
     </Container>
   );
@@ -37,12 +37,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`;
-
-const Title = styled.span`
-  font-size: 17px;
-  font-weight: bold;
-  color: ${WHITE};
 `;
 
 const LeftContainer = styled.div`
