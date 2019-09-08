@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { BLUERY_GREY, CHARCOAL_GREY, WHITE } from '../../../commons/colors';
 import Chatroom from '../../../models/chatroom';
 import Badge from './Badge';
+import isToday from '../../../commons/isToday';
+import getKoreanDayOfWeek from '../../../commons/getKoreanDayOfWeek';
 
 const duration = 400;
 
@@ -42,7 +44,13 @@ const ChatListItem = (props: Props) => {
     });
   }, [push, id]);
 
-  const lastDate = useMemo(() => dayjs(createdAt).format('HH:mm'), [createdAt]);
+  const lastDate = useMemo(() => {
+    const date = dayjs(createdAt);
+    if (isToday(date)) {
+      return date.format('HH:mm');
+    }
+    return `${getKoreanDayOfWeek(date)}요일`;
+  }, [createdAt]);
 
   return (
     <Transition

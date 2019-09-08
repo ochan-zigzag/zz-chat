@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { ChatMsg } from '../models/chatMsg';
 import Chatroom from '../models/chatroom';
 import User from '../models/user';
@@ -46,29 +48,31 @@ export const usersByUserId: { [key: string]: User } = {
   },
 };
 
+const today = dayjs();
+
 export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '장만월 사장님': [
     {
       content: '출근했니?',
-      createdAt: new Date('2019-09-10 10:10:48'),
+      createdAt: new Date(`2019/09/10 10:10:48`),
       id: '13',
       userId: '장만월 사장님',
     },
     {
       content: '출근했냐구?',
-      createdAt: new Date('2019-09-10 10:10:58'),
+      createdAt: new Date('2019/09/10 10:10:58'),
       id: '3',
       userId: '장만월 사장님',
     },
     {
       content: '어딘데 출근 안하니 죽고싶니?',
-      createdAt: new Date('2019-09-10 10:10:59'),
+      createdAt: new Date('2019/09/10 10:10:59'),
       id: '2',
       userId: '장만월 사장님',
     },
     {
       content: '해외 출장중입니다.',
-      createdAt: new Date('2019-09-10 10:11:00'),
+      createdAt: new Date(`2019/09/${today.format('DD')} 10:11:00`),
       id: '1',
       userId: 'me',
     },
@@ -76,7 +80,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '신정근 바텐더': [
     {
       content: '오시는 길에 와인 몇병만 사다주세요',
-      createdAt: new Date('2019-09-08 02:34:00'),
+      createdAt: new Date(`2019/09/${today.format('DD')} 02:34:00`),
       id: '1',
       userId: '신정근 바텐더',
     },
@@ -84,7 +88,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '이미라 의사': [
     {
       content: '휴가 잘 보내고 계신가요? 다름이 아니라 지금 어딘데 출근 안하니 죽고싶니',
-      createdAt: new Date('2019-09-06 09:32:00'),
+      createdAt: new Date(`2019/09/${today.format('DD')} 09:32:00`),
       id: '1',
       userId: '이미라 의사',
     },
@@ -92,7 +96,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '구찬성 지배인': [
     {
       content: '아 휴가셨군요. 약속은 다음으로 미루시죠!',
-      createdAt: new Date('2019-09-05 09:32:00'),
+      createdAt: new Date('2019/09/05 09:32:00'),
       id: '1',
       userId: '구찬성 지배인',
     },
@@ -100,7 +104,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '노준석 총지배인': [
     {
       content: '휴가에서 언제 돌아오시는지요. 돌아오시면 와인 몇병만 사다주세요',
-      createdAt: new Date('2019-08-30 09:32:00'),
+      createdAt: new Date('2019/08/30 09:32:00'),
       id: '1',
       userId: '노준석 총지배인',
     },
@@ -108,7 +112,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   '김유나 인턴': [
     {
       content: '304호 키를 잃어버렸어요 어떻게 해야하죠 ㅠ',
-      createdAt: new Date('2019-08-29 09:32:00'),
+      createdAt: new Date('2019/08/29 09:32:00'),
       id: '1',
       userId: '김유나 인턴',
     },
@@ -116,7 +120,7 @@ export const chatMsgsByChatroomId: { [key: string]: ChatMsg[] } = {
   구현모: [
     {
       content: '술먹자',
-      createdAt: new Date('2019-08-28 09:32:00'),
+      createdAt: new Date('2019/08/28 09:32:00'),
       id: '1',
       userId: '구현모',
     },
