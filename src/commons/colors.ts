@@ -5,3 +5,4 @@ export const BLUERY_GREY = '#a4a6b0';
 export const WHITE = '#ffffff';
 export const BLACK = '#000000';
 export const GREY = '#f9f9fb';
+export const LIGHT_GREY = '#e5e5e7';
