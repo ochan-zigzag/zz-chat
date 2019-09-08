@@ -9,6 +9,8 @@ interface Props {
   rightComponent?: ReactNode;
 }
 
+export const HEADER_HEIGHT = '44px';
+
 const Header = (props: Props) => {
   const { title, leftComponent, rightComponent } = props;
 
@@ -28,7 +30,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 44px;
+  height: ${HEADER_HEIGHT};
   background-color: ${PURPLE};
   z-index: 10;
   display: flex;

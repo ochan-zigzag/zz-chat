@@ -4,13 +4,10 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
 
 import { PURPLE } from '../../../commons/colors';
+import { HEADER_HEIGHT } from '../../../components/Header';
+import DraggableImage from './DraggableImage';
 
 const imageUrls = [
-  'images/img-shot-1.png',
-  'images/img-shot-2.png',
-  'images/img-shot-3.png',
-  'images/img-shot-4.png',
-  'images/img-shot-5.png',
   'images/img-shot-1.png',
   'images/img-shot-2.png',
   'images/img-shot-3.png',
@@ -24,6 +21,8 @@ interface Props {
   isVisible: boolean;
 }
 
+export const GALLERY_CAROUSEL_HEIGHT = '68px';
+
 const GalleryCarousel = (props: Props) => {
   const { isVisible } = props;
 
@@ -32,7 +31,7 @@ const GalleryCarousel = (props: Props) => {
       {state => (
         <Container state={state}>
           {imageUrls.map(url => (
-            <Image state={state} key={url} src={url} />
+            <DraggableImage key={url} src={url} state={state} />
           ))}
           <Divider />
         </Container>
@@ -44,24 +43,17 @@ const GalleryCarousel = (props: Props) => {
 export default GalleryCarousel;
 
 const Container = styled.div<{ state: TransitionStatus }>`
+  position: absolute;
+  top: ${HEADER_HEIGHT};
+  left: 0;
   width: calc(100% - 32px);
-  height: 68px;
+  height: ${({ state }) => (state === 'entering' || state === 'entered' ? GALLERY_CAROUSEL_HEIGHT : 0)};
   background-color: ${PURPLE};
   display: flex;
   padding: 0 16px;
   overflow-y: hidden;
   align-items: center;
-  transition: 0.3s;
-  transform: translate3d(0, ${({ state }) => (state === 'entering' || state === 'entered' ? 0 : '-68px')}, 0);
-`;
-
-const Image = styled.img<{ state: TransitionStatus }>`
-  min-width: 46px;
-  height: 46px;
-  border-radius: 4px;
-  margin-right: 10px;
-  transition: 0.3s;
-  transform: scale(${({ state }) => (state === 'entering' || state === 'entered' ? 1 : 0)});
+  transition: height 0.3s;
 `;
 
 const Divider = styled.div`

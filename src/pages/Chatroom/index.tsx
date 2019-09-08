@@ -1,24 +1,28 @@
 import React, { useCallback, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
 import { GREY } from '../../commons/colors';
+import CustomDragLayer from '../../components/CustomDragLayer';
 import Header from '../../components/Header';
 import { useChatMsgs } from '../../services/chatMsg';
 import { useChatroom } from '../../services/chatroom';
 import { useMyUser } from '../../services/user';
 import Bottom from './Bottom';
-import ChatMsgBox from './ChatMsgBox';
+import ChatMsgContainer from './ChatMsgContainer';
 import BackButton from './Header/BackButton';
 import SearchButton from './Header/SearchButton';
 import UploadButton from './Header/UploadButton';
 import GalleryCarousel from './Upload/GalleryCarousel';
 
+const duration = 300;
+
 const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
   const { chatroomId } = props.match.params;
-  const [chatroom, loadingChatroom, errorChatroom] = useChatroom(chatroomId);
-  const { chatMsgs, loading: loadingChatMsgs, error: errorChatMsgs, fetchMore, addMsg } = useChatMsgs(chatroomId);
-  const [myUser, loadingMyUser, errorMyUser] = useMyUser();
+  const [chatroom, loadingChatroom] = useChatroom(chatroomId);
+  const { chatMsgs, fetchMore, addMsg } = useChatMsgs(chatroomId);
+  const [myUser] = useMyUser();
   const [isGalleryCarouselVisible, setIsGalleryCarouselVisible] = useState(false);
 
   const handleClickUpload = useCallback(() => {
@@ -42,14 +46,14 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
           </>
         }
       />
-
       <GalleryCarousel isVisible={isGalleryCarouselVisible} />
-
-      {chatMsgs.map(chatMsg => (
-        <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} />
-      ))}
+      <Transition in={isGalleryCarouselVisible} timeout={duration}>
+        {state => <ChatMsgContainer state={state} myUser={myUser} chatMsgs={chatMsgs} />}
+      </Transition>
 
       <Bottom myUserId={myUser.id} addMsg={addMsg} />
+
+      <CustomDragLayer />
     </Container>
   );
 };
