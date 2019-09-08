@@ -65,4 +65,6 @@ const Container = styled.div`
   padding-bottom: 100px;
   background-color: ${GREY};
   min-height: calc(100vh - 144px);
+  display: flex;
+  flex-direction: column;
 `;

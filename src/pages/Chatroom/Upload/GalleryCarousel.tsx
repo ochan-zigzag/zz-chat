@@ -63,7 +63,7 @@ const GalleryCarousel = (props: Props) => {
 export default GalleryCarousel;
 
 const Container = styled.div<{ state: TransitionStatus }>`
-  position: absolute;
+  position: fixed;
   top: ${HEADER_HEIGHT};
   left: 0;
   width: calc(100% - 32px);
@@ -74,6 +74,7 @@ const Container = styled.div<{ state: TransitionStatus }>`
   overflow-y: hidden;
   align-items: center;
   transition: height 0.3s;
+  z-index: 100;
 `;
 
 const Divider = styled.div`
