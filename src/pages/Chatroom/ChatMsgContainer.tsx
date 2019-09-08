@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
@@ -23,6 +23,8 @@ const ChatMsgContainer = observer((props: Props) => {
 
   const { uploadingImageUrl } = useContext(ChatMsgStore);
 
+  const [inProp, setInProp] = useState(false);
+
   const [{ isOver }, drop] = useDrop({
     accept: ITEM_TYPE,
     drop: () => ({ name: 'chatMsgContainer' }),
@@ -32,7 +34,7 @@ const ChatMsgContainer = observer((props: Props) => {
   return (
     <Container ref={drop} state={state}>
       {chatMsgs.map(chatMsg => (
-        <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} />
+        <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} inProp={inProp} setInProp={setInProp} />
       ))}
       {!!uploadingImageUrl && <UploadingImage src={uploadingImageUrl} />}
     </Container>

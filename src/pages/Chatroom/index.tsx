@@ -29,10 +29,14 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
     setIsGalleryCarouselVisible(!isGalleryCarouselVisible);
   }, [isGalleryCarouselVisible]);
 
+  const handleClickBack = useCallback(() => {
+    props.history.push('/');
+  }, []);
+
   return (
     <Container>
       <Header
-        leftComponent={<BackButton />}
+        leftComponent={<BackButton onClickBack={handleClickBack} />}
         title={chatroom ? chatroom.name : ''}
         rightComponent={
           <>
@@ -43,7 +47,7 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
         }
       />
       {loadingChatroom || !chatroom || !myUser ? (
-        <p>loading...</p>
+        <>{/* TODO: 스켈레톤 보여주기 */}</>
       ) : (
         <>
           <GalleryCarousel isVisible={isGalleryCarouselVisible} chatroomId={chatroomId} userId={myUser.id} />

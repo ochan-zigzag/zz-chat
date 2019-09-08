@@ -1,9 +1,16 @@
 import React, { useCallback } from 'react';
 
-const BackButton = () => {
+interface Props {
+  onClickBack: () => void;
+}
+
+const BackButton = (props: Props) => {
+  const { onClickBack } = props;
+
   const handleClick = useCallback(() => {
-    // TODO
+    onClickBack();
   }, []);
+
   return <img src="/images/ic-back.svg" onClick={handleClick} />;
 };
 

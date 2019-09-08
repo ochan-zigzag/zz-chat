@@ -20,7 +20,7 @@ const getUserChatMsgs = async ({
 }) => {
   // 실제론 서버에서 fetch 해야할 로직
   const msgs = chatMsgsByChatroomId[chatroomId];
-  await sleep(100);
+  await sleep(10);
   return msgs ? msgs.slice(offset, limit) : [];
 };
 

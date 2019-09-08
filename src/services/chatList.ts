@@ -5,7 +5,7 @@ import Chatroom from '../models/chatroom';
 import { chatlist } from './data';
 
 const getChatList = async (): Promise<Chatroom[]> => {
-  await sleep(100);
+  await sleep(10);
   return chatlist;
 };
 

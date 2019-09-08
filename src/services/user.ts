@@ -7,7 +7,7 @@ import MyUserStore from '../store/userStore';
 import { usersByUserId } from './data';
 
 const getUser = async (userId: string): Promise<User | undefined> => {
-  await sleep(400);
+  await sleep(10);
   // 서버에서 가져왔다고 가정
   return usersByUserId[userId]; // 서버에서 가져왔다고 가정
 };
