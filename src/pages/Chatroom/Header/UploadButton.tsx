@@ -1,9 +1,16 @@
 import React, { useCallback } from 'react';
 
-const UploadButton = () => {
+interface Props {
+  onClickUpload: () => void;
+}
+
+const UploadButton = (props: Props) => {
+  const { onClickUpload } = props;
+
   const handleClick = useCallback(() => {
-    // TODO
-  }, []);
+    onClickUpload();
+  }, [onClickUpload]);
+
   return <img src="images/ic-upload.svg" onClick={handleClick} />;
 };
 

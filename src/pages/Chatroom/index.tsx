@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 
@@ -12,32 +12,38 @@ import ChatMsgBox from './ChatMsgBox';
 import BackButton from './Header/BackButton';
 import SearchButton from './Header/SearchButton';
 import UploadButton from './Header/UploadButton';
+import GalleryCarousel from './Upload/GalleryCarousel';
 
 const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
   const { chatroomId } = props.match.params;
   const [chatroom, loadingChatroom, errorChatroom] = useChatroom(chatroomId);
   const { chatMsgs, loading: loadingChatMsgs, error: errorChatMsgs, fetchMore, addMsg } = useChatMsgs(chatroomId);
   const [myUser, loadingMyUser, errorMyUser] = useMyUser();
+  const [isGalleryCarouselVisible, setIsGalleryCarouselVisible] = useState(false);
+
+  const handleClickUpload = useCallback(() => {
+    setIsGalleryCarouselVisible(!isGalleryCarouselVisible);
+  }, [isGalleryCarouselVisible]);
 
   if (loadingChatroom || !chatroom || !myUser) {
     return <p>loading...</p>;
   }
 
-  const { name } = chatroom;
-
   return (
     <Container>
       <Header
         leftComponent={<BackButton />}
-        title={name}
+        title={chatroom.name}
         rightComponent={
           <>
-            <UploadButton />
+            <UploadButton onClickUpload={handleClickUpload} />
             <Divider />
             <SearchButton />
           </>
         }
       />
+
+      <GalleryCarousel isVisible={isGalleryCarouselVisible} />
 
       {chatMsgs.map(chatMsg => (
         <ChatMsgBox key={chatMsg.id} chatMsg={chatMsg} myUserId={myUser.id} />
