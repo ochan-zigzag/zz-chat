@@ -37,18 +37,16 @@ const ChatListItem = (props: Props) => {
 
   const handleClickContainer = useCallback(() => {
     setInProp(false);
-  }, []);
-
-  const handleTransitionExited = useCallback(() => {
-    push(`/${id}`);
-  }, [push]);
+    setTimeout(() => {
+      push(`/${id}`);
+    });
+  }, [push, id]);
 
   const lastDate = useMemo(() => dayjs(createdAt).format('HH:mm'), [createdAt]);
 
   return (
     <Transition
       onEnter={node => node.offsetHeight}
-      onExited={handleTransitionExited}
       in={inProp}
       timeout={{ enter: 0, exit: duration }}
       mountOnEnter
