@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 
 import Header from '../../components/Header';
@@ -7,14 +8,20 @@ import ChatListItem from './ChatListItem';
 import MenuButton from './Header/MenuButton';
 import MyPageButton from './Header/MyPageButton';
 
-const ChatList = () => {
+const ChatList = (props: RouteComponentProps) => {
   const [chatList, loading, error] = useChatList();
+  const [inProp, setInProp] = useState(false);
+
+  const push = useCallback((path: string) => {
+    props.history.push(path);
+  }, []);
+
   return (
     <Container>
       <Header leftComponent={<MenuButton />} title="채팅" rightComponent={<MyPageButton />} />
       <ChatListContainer>
         {chatList.map(chatroom => (
-          <ChatListItem key={chatroom.id} chatroom={chatroom} />
+          <ChatListItem inProp={inProp} setInProp={setInProp} push={push} key={chatroom.id} chatroom={chatroom} />
         ))}
       </ChatListContainer>
     </Container>

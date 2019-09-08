@@ -20,7 +20,7 @@ const getUserChatMsgs = async ({
 }) => {
   // 실제론 서버에서 fetch 해야할 로직
   const msgs = chatMsgsByChatroomId[chatroomId];
-  await sleep(500);
+  await sleep(100);
   return msgs ? msgs.slice(offset, limit) : [];
 };
 
@@ -68,8 +68,12 @@ export const useChatMsgs = (
   useEffect(() => {
     const fetchChatMsgs = async () => {
       try {
+        if (chatMsgStore.getChatMsgs(chatroomId).length > 0) {
+          return;
+        }
         setLoading(true);
         const data = await getUserChatMsgs({ chatroomId, offset, limit: CHAT_MSGS_PAGE });
+
         chatMsgStore.appendChatMsgs(chatroomId, data);
       } catch (e) {
         setError(e);

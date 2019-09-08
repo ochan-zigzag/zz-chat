@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
@@ -29,15 +29,11 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
     setIsGalleryCarouselVisible(!isGalleryCarouselVisible);
   }, [isGalleryCarouselVisible]);
 
-  if (loadingChatroom || !chatroom || !myUser) {
-    return <p>loading...</p>;
-  }
-
   return (
     <Container>
       <Header
         leftComponent={<BackButton />}
-        title={chatroom.name}
+        title={chatroom ? chatroom.name : ''}
         rightComponent={
           <>
             <UploadButton onClickUpload={handleClickUpload} />
@@ -46,12 +42,18 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
           </>
         }
       />
-      <GalleryCarousel isVisible={isGalleryCarouselVisible} chatroomId={chatroomId} userId={myUser.id} />
-      <Transition in={isGalleryCarouselVisible} timeout={duration}>
-        {state => <ChatMsgContainer state={state} myUser={myUser} chatMsgs={chatMsgs} />}
-      </Transition>
+      {loadingChatroom || !chatroom || !myUser ? (
+        <p>loading...</p>
+      ) : (
+        <>
+          <GalleryCarousel isVisible={isGalleryCarouselVisible} chatroomId={chatroomId} userId={myUser.id} />
+          <Transition in={isGalleryCarouselVisible} timeout={duration}>
+            {state => <ChatMsgContainer state={state} myUser={myUser} chatMsgs={chatMsgs} />}
+          </Transition>
 
-      <Bottom myUserId={myUser.id} addMsg={addMsg} />
+          <Bottom myUserId={myUser.id} addMsg={addMsg} />
+        </>
+      )}
 
       <CustomDragLayer />
     </Container>

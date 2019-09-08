@@ -5,7 +5,7 @@ import Chatroom from '../models/chatroom';
 import { chatlist } from './data';
 
 const getChatroom = async (chatroomId: string) => {
-  await sleep(500);
+  await sleep(100);
   // 서버에서 가져왔다고 가정
   return chatlist.find(({ id }) => id === chatroomId);
 };
