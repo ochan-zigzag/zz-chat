@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
+
+import ChatMsgStore from '../../../store/chatMsgStore';
 
 export const ITEM_TYPE = 'image';
 
 interface Props {
   src: string;
   state: TransitionStatus;
+  onUpload: (src: string) => void;
 }
+
 const DraggableImage = (props: Props) => {
-  const { src, state } = props;
+  const { src, state, onUpload } = props;
+
   const [{ isDragging }, dragRef, preview] = useDrag({
     item: { src, type: ITEM_TYPE },
-    end: (item: { name: string } | undefined, monitor) => {
+    end: (item: { src: string } | undefined, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        console.log('you drpoed', { dropResult });
+        onUpload(item.src);
       }
     },
     collect: monitor => ({

@@ -46,7 +46,7 @@ const Chatroom = (props: RouteComponentProps<{ chatroomId: string }>) => {
           </>
         }
       />
-      <GalleryCarousel isVisible={isGalleryCarouselVisible} />
+      <GalleryCarousel isVisible={isGalleryCarouselVisible} chatroomId={chatroomId} userId={myUser.id} />
       <Transition in={isGalleryCarouselVisible} timeout={duration}>
         {state => <ChatMsgContainer state={state} myUser={myUser} chatMsgs={chatMsgs} />}
       </Transition>

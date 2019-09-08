@@ -12,14 +12,14 @@ interface Props {
 const ChatMsgBox = (props: Props) => {
   const {
     myUserId,
-    chatMsg: { content, userId },
+    chatMsg: { content, userId, photoUrl },
   } = props;
 
   const isMyChat = useMemo(() => myUserId === userId, [myUserId, userId]);
 
   return (
     <Container isMyChat={isMyChat}>
-      <ChatBox isMyChat={isMyChat}>{content}</ChatBox>
+      {photoUrl ? <Image src={photoUrl} /> : <ChatBox isMyChat={isMyChat}>{content}</ChatBox>}
     </Container>
   );
 };
@@ -44,4 +44,10 @@ const ChatBox = styled.div<{ isMyChat: boolean }>`
   font-size: 14px;
   font-weight: 600;
   color: ${props => (props.isMyChat ? WHITE : CHARCOAL_GREY_TWO)};
+`;
+
+const Image = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
 `;
